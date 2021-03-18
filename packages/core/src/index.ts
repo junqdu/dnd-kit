@@ -69,6 +69,7 @@ export {
   defaultCoordinates,
   getBoundingClientRect,
   getViewRect,
+  getScrollableAncestors,
   closestCenter,
   closestCorners,
   rectIntersection,
