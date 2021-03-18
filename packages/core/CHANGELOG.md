@@ -1,5 +1,11 @@
 # @dnd-kit/core
 
+## 1.2.0
+
+### Minor Changes
+
+- [`a76cd5a`](https://github.com/clauderic/dnd-kit/commit/a76cd5abcc0b17eae20d4a6256d95b47f2e9d050) [#136](https://github.com/clauderic/dnd-kit/pull/136) Thanks [@clauderic](https://github.com/clauderic)! - Added `onActivation` option to sensors. Delegated the responsibility of calling `event.preventDefault()` on activation to consumers, as consumers have the most context to decide whether it is appropriate or not to prevent the default browser behaviour on activation. Consumers of the sensors can prevent the default behaviour on activation using the `onActivation` option. Here is an example using the Pointer sensor: `useSensor(PointerSensor, {onActivation: (event) => event.preventDefault()})`
+
 ## 1.1.0
 
 ### Minor Changes
