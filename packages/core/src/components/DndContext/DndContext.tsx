@@ -34,6 +34,7 @@ import {
   useClientRects,
   useScrollOffsets,
   useViewRect,
+  ScrollAncestorSortingFn,
   SyntheticListener,
 } from '../../hooks/utilities';
 import {
@@ -121,7 +122,12 @@ interface DndEvent extends Event {
 }
 
 interface Props {
-  autoScroll?: boolean;
+  autoScroll?:
+    | boolean
+    | {
+        enabled: boolean;
+        sortScrollableAncestors?: ScrollAncestorSortingFn;
+      };
   announcements?: Announcements;
   cancelDrop?: CancelDrop;
   children?: React.ReactNode;
@@ -545,9 +551,16 @@ export const DndContext = memo(function DndContext({
 
   useAutoScroller({
     pointerCoordinates,
-    disabled: !autoScroll || !activeSensor?.autoScrollEnabled,
+    disabled:
+      !autoScroll ||
+      (typeof autoScroll === 'object' && !autoScroll.enabled) ||
+      !activeSensor?.autoScrollEnabled,
     scrollableAncestors,
     scrollableAncestorRects,
+    sortScrollableAncestors:
+      typeof autoScroll === 'object'
+        ? autoScroll.sortScrollableAncestors
+        : undefined,
   });
 
   const contextValue = useMemo(() => {
